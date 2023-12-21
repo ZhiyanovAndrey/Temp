@@ -87,7 +87,7 @@ static string BreakCamelCase(string str)
 
 
 
-// складывает цифры кратные 3 или 5 
+// складываем цифры кратные 3 или 5 
 //static int Solution(int value) => Enumerable.Range(0, value).Where(x => x % 3 == 0 || x % 5 == 0).Sum();          //Sum(i => i % 3 == 0 || i % 5 == 0 ? i : 0); 
 //static int Solution(int value) => value < 3 ? 0 : Enumerable.Range(3, value - 3).Where(x => x % 3 == 0 || x % 5 == 0).Sum();
 
