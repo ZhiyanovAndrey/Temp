@@ -5,12 +5,35 @@
 using System.Text;
 
 
-Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
+Console.WriteLine($"Сумма = {CamelCase.BreakCamelCase("camelCasingTestPrint")}");
+Console.WriteLine();
+Console.WriteLine($"Сумма = {Calc.Sum(2, 4)}");
+Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
+
+
+Console.ReadKey();
+
+
+public class Calc
+{
+    public static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    public static long multiply(int a, int b)
+    {
+        return a * b;
+    }
+}
 
 
 
+
+public class CamelCase
+{
 // разбить предложение по словам
-static string BreakCamelCase(string str)
+internal static string BreakCamelCase(string str)
 {
     System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
 
@@ -25,7 +48,7 @@ static string BreakCamelCase(string str)
 
 
             //result= str.Insert(i, " ");
-            stringBuilder.Append(str, startindex, i-startindex);
+            stringBuilder.Append(str, startindex, i - startindex);
             stringBuilder.Append(' ');
             startindex = i;
 
@@ -34,11 +57,14 @@ static string BreakCamelCase(string str)
 
     }
 
-    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
+    stringBuilder = stringBuilder.Append(str, startindex, str.Length - startindex);
 
 
     return stringBuilder.ToString();
 }
+}
+
+
 
 
 //namespace Solution
@@ -156,4 +182,3 @@ static string BreakCamelCase(string str)
 
 
 
-Console.ReadKey();
