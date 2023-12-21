@@ -6,28 +6,10 @@ using System.Text;
 
 
 Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
-Console.WriteLine();
-Console.WriteLine($"Сумма = {Sum(2,4)}");
-Console.WriteLine($"Произведение = {multiply(2,4)}");
 
 
 
-
-
-
-
-
-static  int Sum(int a, int b) 
-{
-    return a + b;
-}
-
-static long multiply(int a, int b)
-{
-    return a * b;
-}
-
-
+// разбить предложение по словам
 static string BreakCamelCase(string str)
 {
     System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
