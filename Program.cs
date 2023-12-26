@@ -1,9 +1,9 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 
 
 
-
-
+Console.WriteLine($"Сумма = {IPValidation.is_valid_IP("10.10.10.10")}");
 
 
 
@@ -13,9 +13,18 @@ public class IPValidation
 {
     public static bool is_valid_IP(string ipAddres)
     {
-        return true;
+        //Инициализируем новый экземпляр класса System.Text.RegularExpressions.Regex
+        //для указанного регулярного выражения.
+        System.Text.RegularExpressions.Regex IpMatch = new System.Text.RegularExpressions.Regex(@"b(?:d{1,3}.){3}d{1,3}b");
+        //Выполняем проверку обнаружено ли в указанной входной строке
+        //соответствие регулярному выражению, заданному в
+        //конструкторе System.Text.RegularExpressions.Regex.
+        //если да то возвращаем true, если нет то false
+        return IpMatch.IsMatch(ipAddres);
     }
 }
+
+
 
 
 //// разбить предложение по словам Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
