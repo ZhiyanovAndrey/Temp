@@ -1,44 +1,53 @@
-﻿
+﻿using System.Text;
 
 
 
-using System.Text;
-
-
-Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
 
 
 
-// разбить предложение по словам
-static string BreakCamelCase(string str)
+
+
+Console.ReadKey();
+
+public class IPValidation
 {
-    System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-
-    string result = string.Empty;
-    int startindex = 0;
-
-    for (int i = 0; i < str.Length; i++)
+    public static bool is_valid_IP(string ipAddres)
     {
-
-        if (str[i] == str.ToUpper()[i])
-        {
-
-
-            //result= str.Insert(i, " ");
-            stringBuilder.Append(str, startindex, i-startindex);
-            stringBuilder.Append(' ');
-            startindex = i;
-
-        }
-
-
+        return true;
     }
-
-    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
-
-
-    return stringBuilder.ToString();
 }
+
+
+//// разбить предложение по словам Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
+//static string BreakCamelCase(string str)
+//{
+//    System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+
+//    string result = string.Empty;
+//    int startindex = 0;
+
+//    for (int i = 0; i < str.Length; i++)
+//    {
+
+//        if (str[i] == str.ToUpper()[i])
+//        {
+
+
+//            //result= str.Insert(i, " ");
+//            stringBuilder.Append(str, startindex, i-startindex);
+//            stringBuilder.Append(' ');
+//            startindex = i;
+
+//        }
+
+
+//    }
+
+//    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
+
+
+//    return stringBuilder.ToString();
+//}
 
 
 //namespace Solution
@@ -156,4 +165,4 @@ static string BreakCamelCase(string str)
 
 
 
-Console.ReadKey();
+
