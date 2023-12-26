@@ -161,6 +161,40 @@ public class IPValidation
 //    return result.ToArray();
 //}
 
+public class CamelCase
+{
+    // разбить предложение по словам
+    internal static string BreakCamelCase(string str)
+    {
+        System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+
+        string result = string.Empty;
+        int startindex = 0;
+
+        for (int i = 0; i < str.Length; i++)
+        {
+
+            if (str[i] == str.ToUpper()[i])
+            {
+
+
+                //result= str.Insert(i, " ");
+                stringBuilder.Append(str, startindex, i - startindex);
+                stringBuilder.Append(' ');
+                startindex = i;
+
+            }
+
+
+        }
+
+        stringBuilder = stringBuilder.Append(str, startindex, str.Length - startindex);
+
+
+        return stringBuilder.ToString();
+    }
+}
+
 
 
 
