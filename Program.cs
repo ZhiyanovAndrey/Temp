@@ -3,14 +3,45 @@ using System.Text;
 
 
 
-Console.WriteLine($"Сумма = {IPValidation.is_valid_IP("10.10.10.10")}");
+Console.WriteLine($"Сумма = {CamelCase.BreakCamelCase("camelCasingTestPrint")}");
+Console.WriteLine();
+Console.WriteLine($"Сумма = {Calc.Sum(2, 4)}");
+Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
+
+
+
+
+
+
+
+
+
+Console.WriteLine($"Сумма = {IPValidation.is_valid_IP1("10.10.10.10")}");
 
 
 
 Console.ReadKey();
 
+
+
 public class IPValidation
 {
+
+    // возврат IP в нормальном виде
+    public static string is_valid_IP1(string Address)
+    {
+        string ip = string.Empty;
+        string pattern = @"dd?d?.dd?d?.dd?d?.dd?d?";
+        System.Text.RegularExpressions.Regex regex =
+        new System.Text.RegularExpressions.Regex(pattern);
+        System.Text.RegularExpressions.Match match = regex.Match(Address);
+        while (match.Success)
+        {
+            ip = match.Value;
+            match = match.NextMatch();
+        }
+        return ip;
+    }
     public static bool is_valid_IP(string ipAddres)
     {
         //Инициализируем новый экземпляр класса System.Text.RegularExpressions.Regex
@@ -25,10 +56,21 @@ public class IPValidation
 }
 
 
-// разбить предложение по словам
-static string BreakCamelCase(string str)
+// класс для unittests
+public class Calc
 {
-    System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+    public static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    public static long multiply(int a, int b)
+    {
+        return a * b;
+    }
+}
+
+
 
 
 //// разбить предложение по словам Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
@@ -42,23 +84,25 @@ static string BreakCamelCase(string str)
 //    for (int i = 0; i < str.Length; i++)
 //    {
 
-            //result= str.Insert(i, " ");
-            stringBuilder.Append(str, startindex, i-startindex);
-            stringBuilder.Append(' ');
-            startindex = i;
+//        if (str[i] == str.ToUpper()[i])
+//        {
+
+
+//            //result= str.Insert(i, " ");
+//            stringBuilder.Append(str, startindex, i-startindex);
+//            stringBuilder.Append(' ');
+//            startindex = i;
 
 //        }
 
 
 //    }
 
-    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
+//    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
 
 
-    return stringBuilder.ToString();
-}
-
-
+//    return stringBuilder.ToString();
+//}
 
 
 //namespace Solution
