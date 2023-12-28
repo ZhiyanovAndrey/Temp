@@ -16,7 +16,7 @@ using System.Text;
 
 
 
-Console.WriteLine($"Сумма = {IPValidation.rightIP("10dr.10.10.10")}");
+Console.WriteLine($"Сумма = {IPValidation.is_valid_IP("192.143.123.61")}");
 
 
 
