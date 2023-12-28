@@ -1,67 +1,61 @@
-﻿
-
-
-
+﻿using System.Net;
 using System.Text;
 
 
-Console.WriteLine($"Сумма = {CamelCase.BreakCamelCase("camelCasingTestPrint")}");
-Console.WriteLine();
-Console.WriteLine($"Сумма = {Calc.Sum(2, 4)}");
-Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
+
+Console.WriteLine($"Сумма = {IPValidation.is_valid_IP("10.10.10.10")}");
+
 
 
 Console.ReadKey();
 
-
-public class Calc
+public class IPValidation
 {
-    public static int Sum(int a, int b)
+    public static bool is_valid_IP(string ipAddres)
     {
-        return a + b;
-    }
-
-    public static long multiply(int a, int b)
-    {
-        return a * b;
+        //Инициализируем новый экземпляр класса System.Text.RegularExpressions.Regex
+        //для указанного регулярного выражения.
+        System.Text.RegularExpressions.Regex IpMatch = new System.Text.RegularExpressions.Regex(@"b(?:d{1,3}.){3}d{1,3}b");
+        //Выполняем проверку обнаружено ли в указанной входной строке
+        //соответствие регулярному выражению, заданному в
+        //конструкторе System.Text.RegularExpressions.Regex.
+        //если да то возвращаем true, если нет то false
+        return IpMatch.IsMatch(ipAddres);
     }
 }
 
 
-
-
-public class CamelCase
-{
 // разбить предложение по словам
-internal static string BreakCamelCase(string str)
+static string BreakCamelCase(string str)
 {
     System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
 
-    string result = string.Empty;
-    int startindex = 0;
 
-    for (int i = 0; i < str.Length; i++)
-    {
+//// разбить предложение по словам Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
+//static string BreakCamelCase(string str)
+//{
+//    System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
 
-        if (str[i] == str.ToUpper()[i])
-        {
+//    string result = string.Empty;
+//    int startindex = 0;
 
+//    for (int i = 0; i < str.Length; i++)
+//    {
 
             //result= str.Insert(i, " ");
-            stringBuilder.Append(str, startindex, i - startindex);
+            stringBuilder.Append(str, startindex, i-startindex);
             stringBuilder.Append(' ');
             startindex = i;
 
-        }
+//        }
 
 
-    }
+//    }
 
-    stringBuilder = stringBuilder.Append(str, startindex, str.Length - startindex);
+    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
 
 
     return stringBuilder.ToString();
-}
 }
 
 
@@ -177,6 +171,41 @@ internal static string BreakCamelCase(string str)
 
 //    return result.ToArray();
 //}
+
+public class CamelCase
+{
+    // разбить предложение по словам
+    internal static string BreakCamelCase(string str)
+    {
+        System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+
+        string result = string.Empty;
+        int startindex = 0;
+
+        for (int i = 0; i < str.Length; i++)
+        {
+
+            if (str[i] == str.ToUpper()[i])
+            {
+
+
+                //result= str.Insert(i, " ");
+                stringBuilder.Append(str, startindex, i - startindex);
+                stringBuilder.Append(' ');
+                startindex = i;
+
+            }
+
+
+        }
+
+        stringBuilder = stringBuilder.Append(str, startindex, str.Length - startindex);
+
+
+        return stringBuilder.ToString();
+    }
+}
+
 
 
 
