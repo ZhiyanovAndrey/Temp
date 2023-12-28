@@ -16,7 +16,7 @@ Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
 
 
 
-Console.WriteLine($"Сумма = {IPValidation.is_valid_IP1("10.10.10.10")}");
+Console.WriteLine($"Сумма = {IPValidation.is_valid_IP("192.143.123.61")}");
 
 
 
