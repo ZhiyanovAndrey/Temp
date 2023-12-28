@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 
 
 
@@ -16,7 +17,7 @@ using System.Text;
 
 
 
-Console.WriteLine($"Сумма = {IPValidation.is_valid_IP("192.143.123.61")}");
+Console.WriteLine($"Сумма = {IPValidation.IsIPAddress3("192.143.123.61")}");
 
 
 
@@ -42,7 +43,7 @@ public class IPValidation
         }
         return ip;
     }
-    public static bool is_valid_IP(string ipAddres)
+    public static bool IsIPAddress2(string ipAddres)
     {
         //Инициализируем новый экземпляр класса System.Text.RegularExpressions.Regex
         //для указанного регулярного выражения.
@@ -52,6 +53,17 @@ public class IPValidation
         //конструкторе System.Text.RegularExpressions.Regex.
         //если да то возвращаем true, если нет то false
         return IpMatch.IsMatch(ipAddres);
+    }
+
+    public static bool IsIPAddress3(string ipAddress)
+    {
+        bool isIPAddres = false;
+        Match match = Regex.Match(ipAddress, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b");
+        if (match.Success)
+        {
+            isIPAddres = true;
+        }
+        return isIPAddres;
     }
 }
 
