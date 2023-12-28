@@ -3,10 +3,10 @@ using System.Text;
 
 
 
-Console.WriteLine($"Сумма = {CamelCase.BreakCamelCase("camelCasingTestPrint")}");
-Console.WriteLine();
-Console.WriteLine($"Сумма = {Calc.Sum(2, 4)}");
-Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
+//Console.WriteLine($"Сумма = {CamelCase.BreakCamelCase("camelCasingTestPrint")}");
+//Console.WriteLine();
+//Console.WriteLine($"Сумма = {Calc.Sum(2, 4)}");
+//Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
 
 
 
@@ -16,7 +16,7 @@ Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
 
 
 
-Console.WriteLine($"Сумма = {IPValidation.is_valid_IP1("10.10.10.10")}");
+Console.WriteLine($"Сумма = {IPValidation.rightIP("10dr.10.10.10")}");
 
 
 
@@ -28,7 +28,7 @@ public class IPValidation
 {
 
     // возврат IP в нормальном виде
-    public static string is_valid_IP1(string Address)
+    public static string rightIP(string Address)
     {
         string ip = string.Empty;
         string pattern = @"dd?d?.dd?d?.dd?d?.dd?d?";
