@@ -10,14 +10,43 @@ using System.Text.RegularExpressions;
 //Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
 
 
+/* 
+ * Очень простое и эффективное (по времени) решение — создание хэш-таблицы, отображающей целое число в целое число. Данный алгоритм работает, 
+ * пошагово проходя весь массив. Для каждого элемента x в хэш-таблице ищется sum – x и, 
+ * если запись существует, выводится (x, sum — x). После этого x добавляется в таблицу и проверяется следующий элемент.
+ */
+
+//// суммирует только 2 числа в массиве
+//TwoSum(new[] { 1, 2, 3 }, 4).OrderBy(a => a).ToArray();
+
+
+//static int[] TwoSum(int[] numbers, int target)
+//{
+//    List<int> result = new List<int>();
+//    for (int i = 0; i < numbers.Length - 1; i++)
+//    {
+//        for (int j = i + 1; j < numbers.Length; j++)
+//        {
+//            int a = numbers[i] + numbers[j];
+//            if (a == target)
+//            {
+//                result.Add(numbers[i]);
+//                result.Add(numbers[j]);
+
+//            }
+
+//        }
+
+//    }
+
+
+//    return result.ToArray();
+//}
 
 
 
 
-
-
-
-Console.WriteLine($"Сумма = {IPValidation.IsIPAddress3("192.143.123.61")}");
+Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61")}");
 
 
 
@@ -25,7 +54,7 @@ Console.ReadKey();
 
 
 
-public class IPValidation
+public class StringTraining
 {
 
     // возврат IP в нормальном виде
@@ -55,7 +84,7 @@ public class IPValidation
         return IpMatch.IsMatch(ipAddres);
     }
 
-    public static bool IsIPAddress3(string ipAddress)
+    public static bool IPValidation(string ipAddress)
     {
         bool isIPAddres = false;
         Match match = Regex.Match(ipAddress, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b");
@@ -201,32 +230,7 @@ public class Calc
 
 
 
-//// суммирует только 2 числа в массиве
-//TwoSum(new[] { 1, 2, 3 }, 4).OrderBy(a => a).ToArray();
 
-
-//static int[] TwoSum(int[] numbers, int target)
-//{
-//    List<int> result = new List<int>();
-//    for (int i = 0; i < numbers.Length - 1; i++)
-//    {
-//        for (int j = i + 1; j < numbers.Length; j++)
-//        {
-//            int a = numbers[i] + numbers[j];
-//            if (a == target)
-//            {
-//                result.Add(numbers[i]);
-//                result.Add(numbers[j]);
-
-//            }
-
-//        }
-
-//    }
-
-
-//    return result.ToArray();
-//}
 
 public class CamelCase
 {
