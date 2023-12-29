@@ -47,7 +47,8 @@ using Temp;
 
 
 
-Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61")}");
+Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61s")}");
+Console.WriteLine($"Сумма = {StringTraining.IsIPAddress("192.143.123.61s")}");
 
 
 
@@ -191,13 +192,6 @@ public class Calc
 
 
 
-
-
-public class CamelCase
-{
-    // разбить предложение по словам
-   
-}
 
 
 
