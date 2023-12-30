@@ -40,6 +40,8 @@ using Temp;
 
 //    }
 
+Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61")}");
+Console.WriteLine($"Сумма = {StringTraining.IsIPAddress("192.143.123.61")}");
 
 //    return result.ToArray();
 //}
@@ -47,8 +49,8 @@ using Temp;
 
 
 
-Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61")}");
-Console.WriteLine($"Сумма = {StringTraining.IsIPAddress("192.143.123.61")}");
+Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61s")}");
+Console.WriteLine($"Сумма = {StringTraining.IsIPAddress("192.143.123.61s")}");
 
 
 
@@ -192,66 +194,6 @@ public class Calc
 
 
 
-//// суммирует только 2 числа в массиве
-//TwoSum(new[] { 1, 2, 3 }, 4).OrderBy(a => a).ToArray();
-
-
-//static int[] TwoSum(int[] numbers, int target)
-//{
-//    List<int> result = new List<int>();
-//    for (int i = 0; i < numbers.Length - 1; i++)
-//    {
-//        for (int j = i + 1; j < numbers.Length; j++)
-//        {
-//            int a = numbers[i] + numbers[j];
-//            if (a == target)
-//            {
-//                result.Add(numbers[i]);
-//                result.Add(numbers[j]);
-
-//            }
-
-//        }
-
-//    }
-
-
-//    return result.ToArray();
-//}
-
-public class CamelCase
-{
-    // разбить предложение по словам
-    internal static string BreakCamelCase(string str)
-    {
-        System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-
-        string result = string.Empty;
-        int startindex = 0;
-
-        for (int i = 0; i < str.Length; i++)
-        {
-
-            if (str[i] == str.ToUpper()[i])
-            {
-
-
-                //result= str.Insert(i, " ");
-                stringBuilder.Append(str, startindex, i - startindex);
-                stringBuilder.Append(' ');
-                startindex = i;
-
-            }
-
-
-        }
-
-        stringBuilder = stringBuilder.Append(str, startindex, str.Length - startindex);
-
-
-        return stringBuilder.ToString();
-    }
-}
 
 
 
