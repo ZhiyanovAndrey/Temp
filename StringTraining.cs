@@ -10,8 +10,8 @@ namespace Temp
 {
     public class StringTraining
     {
-        IPAddress address;
 
+        #region Методы для проверки IP
         // возврат IP в нормальном виде
         public static string rightIP(string Address)
         {
@@ -64,6 +64,8 @@ namespace Temp
             catch (Exception e) { }
             return isIPAddres;
         }
+#endregion
+
 
         internal static string BreakCamelCase(string str)
         {
