@@ -46,8 +46,9 @@ using Temp;
 
 
 
-Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61s")}");
-Console.WriteLine($"Сумма = {StringTraining.IsIPAddress("192.143.123.61s")}");
+Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61")}");
+StringTraining.IsValidIp("192.143.123.61");
+
 
 
 
