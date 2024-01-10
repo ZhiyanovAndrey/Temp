@@ -12,17 +12,91 @@ namespace Temp
     {
 
         #region Методы для проверки IP
-        // 
+        //Assert.AreEqual(true, Kata.IsValidIp("0.0.0.0"));
+        //    Assert.AreEqual(true, Kata.IsValidIp("12.255.56.1"));
+        //    Assert.AreEqual(true, Kata.IsValidIp("137.255.156.100"));
+
+        //    Assert.AreEqual(false, Kata.IsValidIp(""));
+        //    Assert.AreEqual(false, Kata.IsValidIp("abc.def.ghi.jkl"));
+        //    //Assert.AreEqual(false, Kata.IsValidIp("123.456.789.0"));
+        //    Assert.AreEqual(false, Kata.IsValidIp("12.34.56"));
+        //    //Assert.AreEqual(false, Kata.IsValidIp("12.34.56.00"));
+        //    //Assert.AreEqual(false, Kata.IsValidIp("12.34.56.7.8"));
+        //    //Assert.AreEqual(false, Kata.IsValidIp("12.34.256.78"));
+        //    Assert.AreEqual(false, Kata.IsValidIp("1234.34.56"));
+        //    Assert.AreEqual(false, Kata.IsValidIp("pr12.34.56.78"));
+        //    Assert.AreEqual(false, Kata.IsValidIp("12.34.56.78sf"));
+        //    Assert.AreEqual(false, Kata.IsValidIp("12.34.56 .1"));
+        //    Assert.AreEqual(false, Kata.IsValidIp("12.34.56.-1"));
+        //    //Assert.AreEqual(false, Kata.IsValidIp("123.045.067.089"));
+        // IsValidIp own vertion
         public static void IsValidIp(string ipAddres)
         {
-
+            Console.WriteLine(ipAddres);
+            int count = 0;
+            bool flag = true;
             string[] ip = ipAddres.Split('.');
             foreach (var item in ip)
             {
-                Console.WriteLine(item);
+
+                if (item == string.Empty) flag = false; // проверка  на пустые ячейки
+                if (item.Contains(" ")) flag = false; // проверка  на пустые ячейки
+                if (item.StartsWith('0') && item.Length > 1) flag = false; // проверка строки на первый 0
+                if (item.Any(c => char.IsLetter(c))) flag = false; // проверка строки на наличие букв
+                if (item.Any(c => char.IsSymbol(c))) flag = false; // проверка строки на наличие пробела и символов
+                if (item.Any(c => char.IsSymbol(c))) flag = false; // 
+
+                // проверка от 0 до 255
+                // ipAddres.Split('.').Select(int.Parse).Count(c => c is >= 0 and <= 255) == 4; // общее количество из 0..255 = 4
+                int number;
+                bool YES = int.TryParse(item, out number);
+                if (YES && (number < 0 || number > 255)) flag = false;
+
+                count++;
             }
+            if (count != 4) flag = false;
+            if (flag) Console.WriteLine("Верный");
+            else Console.WriteLine("Не верный");
 
         }
+        #region МЕТОДЫ ИЗ CODEWARS
+
+        public static bool REGEX1_IsValidIp(string ipAddres) => Regex.IsMatch(ipAddres, @"^(\b(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\b(\.|$)){4}$");
+
+        public static bool REGEX_IsValidIp(string ipAddres)
+        {
+            string octet = @"(([1][0-9][0-9])|([2][5][0-5])|([2][0-4][0-9])|([1-9][0-9])|([0-9]))";
+            string pattern = "^" + octet + @"\." + octet + @"\." + octet + @"\." + octet + "$";
+            return Regex.IsMatch(ipAddres, pattern);
+        }
+
+        public static bool LINQ_IsValidIp(string ipAddress)
+        {
+            return !ipAddress.Split(".").Select(x => x).AsEnumerable().Any(x => x.StartsWith('0') && x.Length > 1) && Regex.IsMatch(ipAddress, @"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+        }
+
+        public static bool IsValidIp1(string ipAddress)
+        {
+            var octets = ipAddress.Split(".");
+
+            if (octets.Count() != 4) return false;
+
+            foreach (var octet in octets)
+            {
+                if (!int.TryParse(octet, out int numericOctet))
+                    return false;
+
+                if (numericOctet < 0 || numericOctet > 255)
+                    return false;
+
+                if (!numericOctet.ToString().Equals(octet))
+                    return false;
+            }
+
+            return true;
+        }
+
+        #endregion
 
         // возврат IP в нормальном виде
         public static string rightIP(string Address)
