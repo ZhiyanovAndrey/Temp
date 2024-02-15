@@ -19,32 +19,45 @@ using Temp;
     var rect1 = new Rectangle(40, 50);
     var rect2 = new Rectangle(10, 10);
 rect1.WriteAB();
+rect2.WriteAB();;
+
+
+Console.WriteLine ($"Квадрат {rect1.IsSquare}");
+Console.WriteLine ($"Квадрат {rect2.IsSquare}");
+
+rect2*=4;
 rect2.WriteAB();
-Console.WriteLine ($"Квадрат {rect1.Perimeter()}");
 
-
-//   public class Rectangle
-//{
-//public int X { get; }
-//public int Y { get; }
-//public int Width { get; }
-//public int Height { get; }
-//public Rectangle(int x1, int y1, int x2, int y2)
-//    {
-//    X = x1;
-//    Y = y1;
-//    Width = x2 - x1;
-//    Height = y2 - y1;
-//}
-//public Rectangle(int x, int y, float width, float height)
-//    {
-//    X = x;
-//    Y = y;
-//    Width = (int)width;
-//    Height = (int)height;
-//}
-//}
 Console.ReadKey();
+
+//public class Rectangle
+//{
+//    public int X { get; }
+//    public int Y { get; }
+//    public int Width { get; }
+//    public int Height { get; }
+//    public Rectangle(int x1, int y1, int width, int height)
+//    {
+//        X = x1;
+//        Y = y1;
+//        int x2= x1+ width; 
+//        int y2= y1+ height;
+
+//        Width = width;
+//        Height = height;
+
+//    }
+//    public Rectangle(int x, int y, float width, float height)
+//    {
+//        X = x;
+//        Y = y;
+//        Width = (int)width;
+//        Height = (int)height;
+//    }
+//}
+
+
+
 
 class Rectangle
 {
