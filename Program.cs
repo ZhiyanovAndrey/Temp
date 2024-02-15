@@ -276,43 +276,7 @@ class FileLogger
 }
 #endregion other code
 
-// Задача:
-// В классе прямоугольник используются 2 конструктора для создания.
-// 1-й конструктор принимает координаты начальной и конечной точки.
-// 2-й конструктор принимает координаты начальной точки и размер прямоугольника.
-// Проблема в том, что при чтении вызывающего кода сложно понять, по какому из двух алгоритмов создается прямоугольник
-// 2-я проблема - это то, что оба конструктора принимают одинаковое количество числовых аргументов. Пришлось сделать костыль (float вместо int), чтобы получить возможность реализовать оба конструктора
-// Как можно исправить ситуацию и сделать вызывающий код более читаемым?
-classRectangle
-{
-publicint X { get; }
-publicint Y { get; }
-publicint Width { get; }
-publicint Height { get; }
-publicRectangle(int x1, int y1, int x2, int y2)
-    {
-    X = x1;
-    Y = y1;
-    Width = x2 - x1;
-    Height = y2 - y1;
-}
-publicRectangle(int x, int y, float width, float height)
-    {
-    X = x;
-    Y = y;
-    Width = (int)width;
-    Height = (int)height;
-}
-}
-// вызывающийкод
-classProgramm
-{
-publicstaticvoidMain()
-    {
-var rect1 = newRectangle(10, 10, 40, 50);
-var rect2 = newRectangle(10, 10, 30f, 40f);
-}
-}
+
 
 
 staticclassTest
