@@ -1,8 +1,6 @@
-﻿
+﻿using System.Drawing;
 
 // Задача: убрать дублирование кода в методах подсчета
-
-using System.Drawing;
 
 class Rectangle
 {
@@ -37,7 +35,7 @@ class Rectangle
         }
     }
 
-    #region otherCode
+
     private Size GetCurrentSize()
     {
         throw new NotImplementedException();
@@ -50,4 +48,5 @@ class Rectangle
     {
         throw new NotImplementedException();
     }
-# endregionotherCode
+
+}
