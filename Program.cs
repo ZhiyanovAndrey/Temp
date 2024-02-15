@@ -1,190 +1,514 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using Temp;
 
 
 
-//Console.WriteLine($"Сумма = {CamelCase.BreakCamelCase("camelCasingTestPrint")}");
-//Console.WriteLine();
-//Console.WriteLine($"Сумма = {Calc.Sum(2, 4)}");
-//Console.WriteLine($"Произведение = {Calc.multiply(2, 4)}");
 
+// Задача: убрать дублирование кода в классах
 
-/* 
- * Очень простое и эффективное (по времени) решение — создание хэш-таблицы, отображающей целое число в целое число. Данный алгоритм работает, 
- * пошагово проходя весь массив. Для каждого элемента x в хэш-таблице ищется sum – x и, 
- * если запись существует, выводится (x, sum — x). После этого x добавляется в таблицу и проверяется следующий элемент.
- */
-
-//// суммирует только 2 числа в массиве
-//TwoSum(new[] { 1, 2, 3 }, 4).OrderBy(a => a).ToArray();
-
-
-//static int[] TwoSum(int[] numbers, int target)
-//{
-//    List<int> result = new List<int>();
-//    for (int i = 0; i < numbers.Length - 1; i++)
-//    {
-//        for (int j = i + 1; j < numbers.Length; j++)
-//        {
-//            int a = numbers[i] + numbers[j];
-//            if (a == target)
-//            {
-//                result.Add(numbers[i]);
-//                result.Add(numbers[j]);
-
-//            }
-
-//        }
-
-//    }
-
-//    return result.ToArray();
-//}
-
-
-
-
-Console.WriteLine($"Сумма = {StringTraining.IPValidation("192.143.123.61gg")}");
-StringTraining.IsValidIp("82..25.155");
-
-
-
-
-Console.ReadKey();
-
-
-
-
-
-
-// класс для unittests
-public class Calc
+class HydropressOperator
 {
-    public static int Sum(int a, int b)
+    public string Login;
+    public string Fio;
+    public Func<string, string, bool> CheckRightStrategy;
+    public bool IsRightFor(string resource)
     {
-        return a + b;
+        return CheckRightStrategy(Login, resource);
+    }
+}
+class InspectorOTK
+{
+    public string Login;
+    public string Fio;
+    public Func<string, string, bool> CheckRightStrategy;
+    public GuidSignId;
+      public bool IsRightFor(string resource)
+    {
+        return CheckRightStrategy(Login, resource);
+    }
+}
+// Задача: убрать дублирование кода в классах
+
+class Rectangle : AClassWithLogger
+{
+    private Size size;
+    public double CalculateArea()
+    {
+        try
+        {
+            double result = size.Width * size.Height;
+            LogCalculationSucces();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            LogCalculationError(ex);
+            throw;
+        }
+    }
+}
+class Circle : AClassWithLogger
+{
+    private int radius;
+    public double CalculateArea()
+    {
+        try
+        {
+            double result = 2 * Math.PI * radius;
+            LogCalculationSucces();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            LogCalculationError(ex);
+            throw;
+        }
+    }
+}
+
+#region otherCode
+abstract class AClassWithLogger
+{
+    protected void LogCalculationSucces()
+    {
+        throw new NotImplementedException();
+    }
+    protected void LogCalculationError(Exception ex)
+    {
+        thrownewNotImplementedException();
+    }
+}
+# endregionotherCode
+// Задача: убрать дублирование кода в методах подсчета
+
+class Rectangle
+{
+    public int CalculatePerimeter()
+    {
+        try
+        {
+            Size size = GetCurrentSize();
+            int result = size.Width + size.Height;
+            LogCalculationSucces();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            LogCalculationError(ex);
+            throw;
+        }
+    }
+    public int CalculateArea()
+    {
+        try
+        {
+            Size size = GetCurrentSize();
+            int result = size.Width * size.Height;
+            LogCalculationSucces();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            LogCalculationError(ex);
+            throw;
+        }
     }
 
-    public static long multiply(int a, int b)
+    #region otherCode
+    private Size GetCurrentSize()
     {
-        return a * b;
+        throw new NotImplementedException();
+    }
+    private void LogCalculationSucces()
+    {
+        throw new NotImplementedException();
+    }
+    private void LogCalculationError(Exception ex)
+    {
+        throw new NotImplementedException();
+    }
+# endregionotherCode
+}
+
+/* Задача:
+  * Упростить код.
+  * В коде представлен метод, реализующий сценарий по формированию 
+  * и выводу отчета пользователю.
+  * Для каждого действия в методе реализовано логирование.
+  * При этом, реализовано 2 логера. Один пишет в БД, другой в файл. 
+  * Сами логгеры создаются где то выше (в вызывающем коде). 
+  * Там же принимается решение, какой логгер следует использовать в данный момент. 
+  * В таком виде код страдает от постояного повторения условия по выбору логгера. 
+  * На этом фоне сложно прочитать бизнес-логику.
+  * Можно ли как-то оптимизировать этот код?
+  * Можно ли вообще отделить логирование от бизнес логики, сделав код максимально чистым?
+* */
+
+partial class ReportForm
+{
+    public void buttonShowReportClick(DbLoggerdbLogger, FileLoggerfileLogger, bool logToDb)
+    {
+        var pipes = PrepareDataForReport();
+        if (logToDb)
+            dbLogger.Log("pipes finded");
+        else
+            fileLogger.Log("pipes finded");
+        var report = CreateReport(pipes);
+        if (logToDb)
+            dbLogger.Log("report created");
+        else
+            fileLogger.Log("report created");
+        RenderReportOnForm(report);
+        if (logToDb)
+            dbLogger.Log("repord rendered");
+        else
+            fileLogger.Log("repord rendered");
     }
 }
 
 
+#region other code
+
+partial class ReportForm
+{
+    private object PrepareDataForReport()
+    {
+        throw new NotImplementedException();
+    }
+    private object CreateReport(object pipes)
+    {
+        throw new NotImplementedException();
+    }
+    private void RenderReportOnForm(object report)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class DbLogger
+{
+    public void Log(string text)
+    {
+        // ...
+    }
+}
+class FileLogger
+{
+    public void Log(string text)
+    {
+        // ...
+    }
+}
+#endregion other code
+/* Задача:
+  * Упроститькод.
+* В коде представлен метод, реализующий сценарий по формированию 
+  * и выводу отчета пользователю.
+  * Для каждого действия в методе реализовано логирование.
+  * При этом, реализовано 2 логера. Один пишет в БД, другой в файл. 
+  * Сами логгеры создаются где то выше (в вызывающем коде). 
+  * Там же принимается решение, какой логгер следует использовать в данный момент. 
+  * В таком виде код страдает от постояного повторения условия по выбору логгера. 
+  * На этом фоне сложно прочитать бизнес-логику.
+  * Можно ли как-то оптимизировать этот код?
+  * Можно ли вообще отделить логирование от бизнес логики, сделав код максимально чистым?
+* */
+
+partial class ReportForm
+{
+    public void buttonShowReportClick(DbLoggerdbLogger, FileLoggerfileLogger, bool logToDb)
+    {
+        var pipes = PrepareDataForReport();
+        if (logToDb)
+            dbLogger.Log("pipes finded");
+        else
+            fileLogger.Log("pipes finded");
+        var report = CreateReport(pipes);
+        if (logToDb)
+            dbLogger.Log("report created");
+        else
+            fileLogger.Log("report created");
+        RenderReportOnForm(report);
+        if (logToDb)
+            dbLogger.Log("repord rendered");
+        else
+            fileLogger.Log("repord rendered");
+    }
+}
 
 
-//// разбить предложение по словам Console.WriteLine($"Сумма = {BreakCamelCase("camelCasingTestPrint")}");
-//static string BreakCamelCase(string str)
-//{
-//    System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+#region other code
 
-//    string result = string.Empty;
-//    int startindex = 0;
+partial class ReportForm
+{
+    private object PrepareDataForReport()
+    {
+        throw new NotImplementedException();
+    }
+    private object CreateReport(object pipes)
+    {
+        throw new NotImplementedException();
+    }
+    private void RenderReportOnForm(object report)
+    {
+        throw new NotImplementedException();
+    }
+}
 
-//    for (int i = 0; i < str.Length; i++)
-//    {
+class DbLogger
+{
+    public void Log(string text)
+    {
+        // ...
+    }
+}
+class FileLogger
+{
+    public void Log(string text)
+    {
+        // ...
+    }
+}
+#endregion other code
 
-//        if (str[i] == str.ToUpper()[i])
-//        {
-
-
-//            //result= str.Insert(i, " ");
-//            stringBuilder.Append(str, startindex, i-startindex);
-//            stringBuilder.Append(' ');
-//            startindex = i;
-
-//        }
-
-
-//    }
-
-//    stringBuilder=stringBuilder.Append(str,startindex,str.Length-startindex);
-
-
-//    return stringBuilder.ToString();
-//}
-
-
-//namespace Solution
-//{
-//    using NUnit.Framework;
-//    using System;
-//    using System.Collections.Generic;
-
-//    [TestFixture]
-//    public class Sample_Tests
-//    {
-//        private static IEnumerable<TestCaseData> testCases
-//        {
-//            get
-//            {
-//                yield return new TestCaseData("camelCasing").Returns("camel Casing");
-//                yield return new TestCaseData("camelCasingTest").Returns("camel Casing Test");
-//            }
-//        }
-
-//        [Test, TestCaseSource("testCases")]
-//        public string Test(string str) => Kata.BreakCamelCase(str);
-//    }
-//}
-
-
-
-
-
-
-// складываем цифры кратные 3 или 5 
-//static int Solution(int value) => Enumerable.Range(0, value).Where(x => x % 3 == 0 || x % 5 == 0).Sum();          //Sum(i => i % 3 == 0 || i % 5 == 0 ? i : 0); 
-//static int Solution(int value) => value < 3 ? 0 : Enumerable.Range(3, value - 3).Where(x => x % 3 == 0 || x % 5 == 0).Sum();
-
-
-//static int Solution(int value)
-//{
-//    List<int> list = new List<int>();
-//    //int[] arr = new int[value];
-//    bool flag = false;
-//    int sum = 0;
-//    if (value < 0) sum = 0;
-
-//    for (int i = 1; i < value; i++)
-//    {
-
-//        if (i % 3 == 0) flag = true;
-//        else if (i % 5 == 0) flag = true; // когда есть 3 на 5 уже не идет
-//        if (flag) list.Add(i);
-//        flag = false;
-
-//    }
-
-//    foreach (var item in list)
-//    {
-//        sum += item;
-//    }
-//    return sum;
-//}
+// Задача:
+// В классе прямоугольник используются 2 конструктора для создания.
+// 1-й конструктор принимает координаты начальной и конечной точки.
+// 2-й конструктор принимает координаты начальной точки и размер прямоугольника.
+// Проблема в том, что при чтении вызывающего кода сложно понять, по какому из двух алгоритмов создается прямоугольник
+// 2-я проблема - это то, что оба конструктора принимают одинаковое количество числовых аргументов. Пришлось сделать костыль (float вместо int), чтобы получить возможность реализовать оба конструктора
+// Как можно исправить ситуацию и сделать вызывающий код более читаемым?
+classRectangle
+{
+publicint X { get; }
+publicint Y { get; }
+publicint Width { get; }
+publicint Height { get; }
+publicRectangle(int x1, int y1, int x2, int y2)
+    {
+    X = x1;
+    Y = y1;
+    Width = x2 - x1;
+    Height = y2 - y1;
+}
+publicRectangle(int x, int y, float width, float height)
+    {
+    X = x;
+    Y = y;
+    Width = (int)width;
+    Height = (int)height;
+}
+}
+// вызывающийкод
+classProgramm
+{
+publicstaticvoidMain()
+    {
+var rect1 = newRectangle(10, 10, 40, 50);
+var rect2 = newRectangle(10, 10, 30f, 40f);
+}
+}
 
 
-//    public class Test
-//{
-//    [Test]
-//    public void SampleTests()
-//    {
-//        Assertion(expected: 23, input: 10);
-//        Assertion(expected: 78, input: 20);
-//        Assertion(expected: 9168, input: 200);
-//        Assertion(expected: 0, input: 0);
-//    }
+staticclassTest
+  {
+    //Вопрос: что выведется в консоль и почему?
 
-//    private static void Assertion(int expected, int input) =>
-//      Assert.AreEqual(
-//        expected,
-//        Kata.Solution(input),
-//        $"Value: {input}"
-//      );
+class Order
+{
+    public int Id;
+    public string Status;
+}
 
+public static void Execute1()
+{
+    var orders = CreateNewOrders(1, 2);
+    var ord1 = orders.First(o => o.Id == 1);
+    ord1.Status = "В доставке";
+
+    foreach (var ord in orders)
+    {
+        Console.WriteLine($"id = {ord.Id}, status = {ord.Status}");
+    }
+}
+
+private static IEnumerable<Order> CreateNewOrders(params int[] orderIDs)
+{
+    return orderIDs.Select(id => new Order { Id = id, Status = "В сборке" });
+}
+
+  }
+
+namespace Test_Linq
+{
+
+    public class Customer
+    {
+        public string Name { get; set; }
+        public List<Order> Orders { get; set; }
+    }
+
+    public class Order
+    {
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
+    }
+
+    public class Product
+    {
+        public string Name { get; set; }
+    }
+
+    class Test
+    {
+
+        static public void Execute()
+        {
+            var apple = new Product { Name = "Apple" };
+            var orange = new Product { Name = "Orange" };
+            var bread = new Product { Name = "Bread" };
+
+            var customers = new[]
+            {
+        new Customer{Name = "Peter", Orders = new[]
+        {
+            new Order { Product = apple, Quantity = 10},
+            new Order { Product = orange, Quantity = 5} }.ToList()
+        },
+        new Customer{Name = "John", Orders = new[]
+        {
+            new Order { Product = bread, Quantity = 5},
+            new Order { Product = orange, Quantity = 2} }.ToList()
+        },
+        new Customer{Name = "Mary", Orders = new[]
+        {
+            new Order { Product = apple, Quantity = 10} }.ToList()
+        }
+}.ToList();
+            Console.WriteLine("Linq test");
+
+            //select customers having orders with Quantity > 5
+
+            //for each customer select his name and the names of the product he bought
+
+        }
+
+    }
+}
+
+// Задача: В примере представлен типичный метод редактирования модели. В приведенном случае - это данные клиента
+// Прочитайте и оцените этот код. Можно ли улучшить читаемость и поддерживаемость этого кода.
+
+public class Customer
+{
+    public Guid Id;
+    public string Fio;
+    public DateTimeRegistryDate;
+    public DateTimeBirthDate;
+    public int Age;
+}
+
+class CustomerForm
+{
+    public Customer EditCustomer(Guid id, string f, DateTime b)
+    {
+        #region Получениеклиентаиз БД
+        OracleConnectioncn = new OracleConnection("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=some.db)(PORT=1234))(CONNECT_DATA=(SID=someSid)));Persist Security Info=True;User ID=someUser;Password=somePass;");
+        OracleCommand c = cn.CreateCommand();
+        c.CommandText = $"select FIO, REG_DATE, BIRTH_DATE from CUSTOMERS where CUSTOMER_ID = '{id}'";
+        DataSet d = new DataSet();
+        OracleDataAdapter da = new OracleDataAdapter(c);
+        da.Fill(d);
+        if (d.Tables[0].Rows.Count == 0)
+        {
+            throw new Exception("Клиентненайден");
+        }
+        Customer с2 = new Customer();
+        с2.Fio = d.Tables[0].Rows[0]["FIO"].ToString();
+        с2.RegistryDate = Convert.ToDateTime(d.Tables[0].Rows[0]["REG_DATE"]);
+        с2.BirthDate = Convert.ToDateTime(d.Tables[0].Rows[0]["BIRTH_DATE"]);
+        с2.Age = DateTime.Now.Year - с2.BirthDate.Year - 1;
+        if ((DateTime.Now.Month > с2.BirthDate.Month) || ((DateTime.Now.Month == с2.BirthDate.Month) && (DateTime.Now.Day >= с2.BirthDate.Day)))
+            с2.Age++;
+        cn.Close();
+        #endregion Получение клиента из БД
+        #region Проверки корректности данных для редактирования
+        if (f == null || f.Trim() == "")
+            throw new Exception("Неуказано ФИО");
+        if (f.ToLower() == "администратор")
+            thrownewException("Это имя зарезервировано для администратора");
+        if (b < с2.RegistryDate)
+            thrownewException("Указана неверная дата рождения");
+        #endregion Проверки корректности данных для редактирования
+        #region Редактирование клиента
+        с2.Fio = f;
+        с2.BirthDate = b;
+        с2.Age = DateTime.Now.Year - с2.BirthDate.Year - 1;
+        if ((DateTime.Now.Month > с2.BirthDate.Month) || ((DateTime.Now.Month == с2.BirthDate.Month) && (DateTime.Now.Day >= с2.BirthDate.Day)))
+            с2.Age++;
+        #endregion Редактирование клиента
+        #region Сохранение в БД
+        cn = new OracleConnection("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=some.db)(PORT=1234))(CONNECT_DATA=(SID=someSid)));Persist Security Info=True;User ID=someUser;Password=somePass;");
+        c = cn.CreateCommand();
+        c.CommandText = $"update CUSTOMERS set FIO = '{с2.Fio}', BIRTH_DATE = to_date('{с2.BirthDate:dd.MM.yyyy}', 'dd.mm.yyyy') where CUSTOMER_ID = '{id}'";
+        c.ExecuteNonQuery();
+        cn.Close();
+# endregionСохранение в БД
+        ShowMessage("Изменение выполнено");
+        return с2;
+    }
+
+    #region other code 
+    private void ShowMessage(string v)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion other code 
+}
+
+--таблица "PIPES"
+/*
+PIPE_NUM |   OPERATION_TIME   |
+-------------------------
+23-0001	|  01.01.2023 11:00  |
+23-0002	|  02.01.2023 12:00  |
+23-0001	|  03.01.2023 10:00  | !
+23-0003	|  04.01.2023 15:00  |
+23-0004	|  05.01.2023 09:00  |
+23-0002	|  06.01.2023 17:00  | !
+23-0003	|  07.01.2023 16:00  | 
+-------------------------
+*/
+
+-- дано SQL
+CREATE TABLE pipes(PIPE_NUM varchar, OPR_TIME timestamp);
+INSERT INTO pipes VALUES('23-0001', '01.01.2023 11:00');
+INSERT INTO pipes VALUES('23-0002', '02.01.2023 12:00');
+INSERT INTO pipes VALUES('23-0001', '03.01.2023 10:00'); --повтор
+INSERT INTO pipes VALUES('23-0003', '04.01.2023 15:00');
+INSERT INTO pipes VALUES('23-0004', '05.01.2023 09:00');
+INSERT INTO pipes VALUES('23-0002', '06.01.2023 11:00'); --повтор
+INSERTINTOpipesVALUES('23-0003', '07.01.2023 12:00'); --повтор, но за пределами диапазона
+
+-- задача: задача: найти все трубы, которые принимались повторно с 03.01.2023 по 06.01.2023
+
+select PIPE_NUM, max(OPR_TIME) from PIPES where PIPE_NUM in(
+select PIPE_NUM from PIPES where OPR_TIME>='03.01.2023' and OPR_TIME<'07.01.2023')
+and OPR_TIME<'07.01.2023'
+group by PIPE_NUM
+havingcount(*)>1;
+
+/*-- задача: найти все трубы, которые принимались повторно с 03.01.2023 по 06.01.2023. Должныбыть 23-0001 и 23-0002
+select PIPE_NUM from PIPES where PIPE_NUM in 
+  (
+select PIPE_NUM from PIPES where OPERATION_TIME >to_date('03.01.2023', 'dd.mm.yyyy') and OPR_TIME <to_date('07.01.2023', 'dd.mm.yyyy')
+  )
+group by PIPE_NUM having count(*)>1*/
 
 
 
