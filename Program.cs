@@ -278,9 +278,6 @@ class FileLogger
 
 
 
-
-staticclassTest
-  {
     //Вопрос: что выведется в консоль и почему?
 
 class Order
