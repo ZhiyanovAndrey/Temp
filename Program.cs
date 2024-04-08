@@ -1,52 +1,10 @@
-﻿using System.Drawing;
-
-// Задача: убрать дублирование кода в методах подсчета
-
-class Rectangle
-{
-    public int CalculatePerimeter()
-    {
-        try
-        {
-            Size size = GetCurrentSize();
-            int result = size.Width + size.Height;
-            LogCalculationSucces();
-            return result;
-        }
-        catch (Exception ex)
-        {
-            LogCalculationError(ex);
-            throw;
-        }
-    }
-    public int CalculateArea()
-    {
-        try
-        {
-            Size size = GetCurrentSize();
-            int result = size.Width * size.Height;
-            LogCalculationSucces();
-            return result;
-        }
-        catch (Exception ex)
-        {
-            LogCalculationError(ex);
-            throw;
-        }
-    }
+﻿using System;
 
 
-    private Size GetCurrentSize()
-    {
-        throw new NotImplementedException();
-    }
-    private void LogCalculationSucces()
-    {
-        throw new NotImplementedException();
-    }
-    private void LogCalculationError(Exception ex)
-    {
-        throw new NotImplementedException();
-    }
+String s1 = "Hello World";
+String s2 = "Hello World";
 
-}
+Console.WriteLine(s1==s2);
+Console.ReadKey();
+
+//assertThat(s1 == s2).isTrue();
