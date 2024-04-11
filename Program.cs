@@ -28,12 +28,30 @@
 //    num *= 2;
 //}
 
-//сделать пример со string
+
+// приммер 1
+int i = 1;
+object obj = i;
+++i;
+Console.WriteLine(i); // 2
+Console.WriteLine(obj); // 1
 
 
-A a = new A { Value = 5 };  // создаем объект ссылочный
+// ghbvth 2
+var s = new S();
+using (s)
+{
+    Console.WriteLine(s.GetDispose());
+}
+Console.WriteLine(s.GetDispose());
+
+
+
+A a = new A { Value = 5 };  // создаем объект ссылочный, что в фигурных
 Helper.Test(a); // передаем ссылку на 5
-Console.WriteLine(a.ToString());
+Console.WriteLine(a.Value); // 10
+Console.WriteLine(a.ToString()); // A
+Console.WriteLine(a.GetType()); // A ????
 
 Console.WriteLine();
 
