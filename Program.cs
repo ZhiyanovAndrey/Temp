@@ -1,6 +1,7 @@
 ﻿using System;
 
 
+
 //String s1 = "Hello World";
 //String s2 = "Hello World";
 
@@ -11,39 +12,50 @@
 
 
 
-// ввыводит 10, при добавлении ref 15
+// ввыводит 10, при добавлении ref выводит 15
 
 
-//int num = 2;
+//string num = "2";
 
-//Multiply(num);
+//Multiply(ref num); // не изменяет num без ref
 
-//Console.WriteLine(num);
-
-//Console.ReadKey();
+//Console.WriteLine($"num {num}");
 
 
-// static void Multiply(int num) // будет создана новая переменная (их называют локальными)
-//{
-//    num *= 2;
-//}
+int i = 123;
+object o = i;  // implicit boxing
 
-
-// приммер 1
-int i = 1;
-object obj = i;
-++i;
-Console.WriteLine(i); // 2
-Console.WriteLine(obj); // 1
-
-
-// ghbvth 2
-var s = new S();
-using (s)
+try
 {
-    Console.WriteLine(s.GetDispose());
+    int j = (short)o;  // attempt to unbox
+
+    System.Console.WriteLine("Unboxing OK.");
 }
-Console.WriteLine(s.GetDispose());
+catch (Exception e)
+{
+    System.Console.WriteLine("{0} Error: Incorrect unboxing.", e.Message);
+}
+
+//// приммер 1
+int i1 = 1;
+object obj = i1;
+++i1;
+Console.WriteLine("i = {0}", i1); // 2
+Console.WriteLine("o = {0}", obj); // 1
+
+int i2 = 123;
+
+// Boxing copies the value of i into object o.
+object o2 = i2;
+
+// Change the value of i.
+i2 = 456;
+
+// The change in i doesn't affect the value stored in o.
+System.Console.WriteLine("i = {0}", i2); // 456
+System.Console.WriteLine("o = {0}", o2); // 123
+
+
 
 
 
@@ -57,6 +69,14 @@ Console.WriteLine();
 
 
 Console.ReadKey();
+
+
+static void Multiply(ref string i) // будет создана новая переменная (их называют локальными)
+{
+    Console.WriteLine($"Multiply {i + i}"); // выведет 4 не изменит i
+    i += i; // изменит локальную переменную
+}
+
 
 static void AnonymousType()
 {
