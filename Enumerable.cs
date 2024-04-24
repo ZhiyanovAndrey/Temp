@@ -28,7 +28,7 @@ namespace Temp
 
 
 
-            return enumerable.Where(x => x % 3 == 0).Select(x => "foo");
+            //return enumerable.Where(x => x % 3 == 0).Select(x => "foo");
             //return enumerable.Where(x => x % 5 == 0).Select(x => "bar");
             //return enumerable.Where(x => x % 15 == 0);
             //return enumerable.Where(x => x % 3 != 0 && x=>x % 5 != 0 $$ x => x % 15 != 0).Select(x => x.ToString());
@@ -36,12 +36,13 @@ namespace Temp
 
 
 
-            //Foreach(int a in enumerable){
-            //    if (enumerable % 3 == 0) yield return "foo";
-            //    if (enumerable % 5 == 0) yield return "bar";
-            //    if (enumerable % 15 == 0) yield return "foobar";
-            //    else yield return a.ToString();
-            //}
+            foreach (int a in enumerable)
+            {
+                if (a % 3 == 0) yield return "foo";
+                if (a % 5 == 0) yield return "bar";
+                if (a % 15 == 0) yield return "foobar";
+                else yield return a.ToString();
+            }
         }
 
     }

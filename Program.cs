@@ -1,8 +1,20 @@
 ﻿using System;
 
 
+var s1 = new MyClass(1);
+var s2 = new MyClass(1);
+var s3 = s1;
 
-var x = new[] { 3, 7, 15, 5 };
+Console.WriteLine(s1 == s2); //false
+Console.WriteLine(s1 == s3); //true
+Console.WriteLine(object.ReferenceEquals(s1,s2)); //false
+
+Console.ReadKey();
+
+
+
+
+var x = new[] { 7, 3, 15, 5 };
 
 
 //IEnumerable<string> x = null;
@@ -19,24 +31,24 @@ foreach (var s in ConvertToFooBar(x))
 
 static IEnumerable<string> ConvertToFooBar(IEnumerable<int> enumerable)
 {
-    //if (enumerable == null)
+    //почему не идет 
+  
+    foreach (int a in enumerable)
+    {
 
-    //    throw reference Exeption;
+        if (a % 3 == 0) return enumerable.Select(x => "foo"); // возвращает коллекцию из 4 foo и дальше не идет 
+        if (a % 5 == 0) return enumerable.Select(x => "bar");
+        if (a % 15 == 0) return enumerable.Select(x => "foobar");
+       
+    }
 
+    return enumerable.Select(x => x.ToString());
 
-
-    return enumerable.Where(x => x % 3 == 0).Select(x => "foo");
-    //return enumerable.Where(x => x % 5 == 0).Select(x => "bar");
-    //return enumerable.Where(x => x % 15 == 0);
-    //return enumerable.Where(x => x % 3 != 0 && x=>x % 5 != 0 $$ x => x % 15 != 0).Select(x => x.ToString());
-
-
-
-
-    //Foreach(int a in enumerable){
-    //    if (enumerable % 3 == 0) yield return "foo";
-    //    if (enumerable % 5 == 0) yield return "bar";
-    //    if (enumerable % 15 == 0) yield return "foobar";
+    //foreach (int a in enumerable)
+    //{
+    //    if (a % 3 == 0) yield return "foo";
+    //    if (a % 5 == 0) yield return "bar";
+    //    if (a % 15 == 0) yield return "foobar";
     //    else yield return a.ToString();
     //}
 }
@@ -87,8 +99,17 @@ Console.WriteLine();
 Console.ReadKey();
 
 
+    public class MyClass
+    {
+        private int id;
 
-public class A
+        public MyClass(int id) => this.id = id;
+    }
+
+
+
+
+    public class A
 {
     public int Value { get; set; }
 }
