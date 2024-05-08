@@ -1,8 +1,8 @@
 ﻿using System;
 
-
-var s1 = new MyClass(1);
-var s2 = new MyClass(1);
+var s1 = new List<string>() { "A" };
+var s2 = new List<string>() { "A" };
+var s4 = new List<string>() { "Б" };
 var s3 = s1;
 
 Console.WriteLine(s1 == s2); //false
@@ -87,8 +87,9 @@ System.Console.WriteLine("o = {0}", o2); // 123
 
 // ввыводит 10, при добавлении ref выводит 15
 
-A a = new A { Value = 5 };  // создаем объект ссылочный, что за запись 1 
-Helper.Test(a); // копируем ссылку на a
+A a = new A { Value = 5 };  // создаем объект ссылочный
+Helper.Test(ref a); // остается 1-й ссылкой при возврате из метода, при добавлении ref a становится ссылкой 2
+// ref когда значение изменится в методе ссылка остается прежней но ссылается на новое значение
 Console.WriteLine(a.Value); // 10
 Console.WriteLine(a.ToString()); // A
 Console.WriteLine(a.GetType()); // A ????
@@ -99,17 +100,8 @@ Console.WriteLine();
 Console.ReadKey();
 
 
-    public class MyClass
-    {
-        private int id;
 
-        public MyClass(int id) => this.id = id;
-    }
-
-
-
-
-    public class A
+public class A
 {
     public int Value { get; set; }
 }
@@ -117,11 +109,12 @@ Console.ReadKey();
 
 public static class Helper
 {
-    public static void Test(A a) // 2 ссылка
+    public static void Test(ref A a) // метод вносит изменения в текущую ссылку, c ref заменяет на 2-ю ссылку
     {
-        a.Value = 10; // изменяем локальную переменную a и глобальная переменная тоже меняется 2
+        a.Value = 10; // 1-я ссылка изменяем локальную переменную a и глобальная переменная тоже меняется 2
 
-        a = new A { Value = 15 }; // изменяет только локальную переменную другая ссылка
+        a = new A { Value = 15 }; // создаем еще один объект с тем же именем, 2-я ссылка изменяет только локальную переменную
+        Console.WriteLine(ReferenceEquals(a, a)); //false
     }
 }
 
