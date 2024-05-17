@@ -1,17 +1,5 @@
 ﻿using System;
 
-var s1 = new List<string>() { "A" };
-var s2 = new List<string>() { "A" };
-var s4 = new List<string>() { "Б" };
-var s3 = s1;
-
-Console.WriteLine(s1 == s2); //false
-Console.WriteLine(s1 == s3); //true
-Console.WriteLine(object.ReferenceEquals(s1,s2)); //false
-
-Console.ReadKey();
-
-
 
 
 var x = new[] { 7, 3, 15, 5 };
@@ -53,11 +41,6 @@ static IEnumerable<string> ConvertToFooBar(IEnumerable<int> enumerable)
     //}
 }
 
-//String s1 = "Hello World";
-//String s2 = "Hello World";
-
-//Console.WriteLine(s1==s2);
-//Console.ReadKey();
 
 
 
@@ -88,8 +71,9 @@ System.Console.WriteLine("o = {0}", o2); // 123
 // ввыводит 10, при добавлении ref выводит 15
 
 A a = new A { Value = 5 };  // создаем объект ссылочный
-Helper.Test(ref a); // остается 1-й ссылкой при возврате из метода, при добавлении ref a становится ссылкой 2
-// ref когда значение изменится в методе ссылка остается прежней но ссылается на новое значение
+Helper.Test(a);
+// ref когда значение изменится в методе ссылка остается прежней но ссылается на новое значение (из урока)
+// фактически остается 1-й ссылкой при возврате из метода, при добавлении ref a становится ссылкой 2, а затем 3
 Console.WriteLine(a.Value); // 10
 Console.WriteLine(a.ToString()); // A
 Console.WriteLine(a.GetType()); // A ????
@@ -109,11 +93,13 @@ public class A
 
 public static class Helper
 {
-    public static void Test(ref A a) // метод вносит изменения в текущую ссылку, c ref заменяет на 2-ю ссылку
+    public static void Test(A a) // метод вносит изменения в текущую ссылку, c ref заменяет на 2-ю ссылку, а затем 3
     {
         a.Value = 10; // 1-я ссылка изменяем локальную переменную a и глобальная переменная тоже меняется 2
 
         a = new A { Value = 15 }; // создаем еще один объект с тем же именем, 2-я ссылка изменяет только локальную переменную
+        a = new A { Value = 25 }; // создаем еще один объект с тем же именем, 2-я ссылка изменяет только локальную переменную
+
         Console.WriteLine(ReferenceEquals(a, a)); //false
     }
 }
