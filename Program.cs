@@ -2,49 +2,27 @@
 
 
 
-var x = new[] { 7, 3, 15, 5 };
 
 
-//IEnumerable<string> x = null;
+  Firm f = new Firm();
+        Console.WriteLine(f.INN);  //null
+        f.INN = 3;
+        ChangeINN(f);
+        Console.WriteLine(f.INN); //3
 
 
-foreach (var s in ConvertToFooBar(x))
+
+public class Firm
 {
-    Console.WriteLine(s);
-    // должен вывести
-    // "foo"
-    // "7" 
-    // "foobar"
-    // "bar"
-}
+    public int INN = 1; // при обьявлении класса поле инициализируется inn 1
 
-static IEnumerable<string> ConvertToFooBar(IEnumerable<int> enumerable)
-{
-    //почему не идет 
-
-    //foreach (int a in enumerable)
-    //{
-
-    //    if (a % 3 == 0) return enumerable.Select(x => "foo"); // возвращает коллекцию из 4 foo и дальше не идет 
-    //    if (a % 5 == 0) return enumerable.Select(x => "bar");
-    //    if (a % 15 == 0) return enumerable.Select(x => "foobar");
-
-    //}
-
-    //return enumerable.Select(x => x.ToString());
-
-    foreach (int a in enumerable)
+    public static void ChangeINN(Firm firm)
     {
-        if (a % 3 == 0) yield return "foo"; // 15 тоже делится на 3, надо сделать если 15 то пропускаем
-        if (a % 5 == 0) yield return "bar";
-        if (a % 15 == 0) yield return "foobar";  
-        else yield return a.ToString();
+        firm.INN = 2;
+        firm = new Firm();
     }
+
 }
-
-
-
-
 
 
 
