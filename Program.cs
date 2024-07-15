@@ -4,13 +4,14 @@
 
 
 
-  Firm f = new Firm();
-        Console.WriteLine(f.INN);  //null
-        f.INN = 3;
-        ChangeINN(f);
-        Console.WriteLine(f.INN); //3
+Firm f = new Firm();
+Console.WriteLine(f.INN);  //1 /null
+f.INN = 3;
+//ChangeINN(f);
+Console.WriteLine(f.INN); //3
 
 
+Console.ReadKey();
 
 public class Firm
 {
@@ -26,7 +27,6 @@ public class Firm
 
 
 
-Console.ReadKey();
 
 
 
